@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.0" author="sjh">
+        <createTable tableName="User" remarks="用户">
+            <column name="id" type="VARCHAR(24)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="loginName" type="VARCHAR(32)" remarks="登录名">
+                <constraints nullable="false"/>
+            </column>
+            <column name="userCode" type="VARCHAR(8)" remarks="用户编码">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(64)" remarks="密码"/>
+            <column name="email" type="VARCHAR(64)" remarks="邮件"/>
+            <column name="realName" type="VARCHAR(32)" remarks="真实姓名"/>
+            <column name="mobileNo" type="VARCHAR(32)" remarks="手机"/>
+            <column name="departmentId" type="BIGINT" remarks="部门ID"/>
+            <column name="roles" type="VARCHAR(255)" remarks="所属角色"/>
+            <column name="authorities" type="LONGTEXT" remarks="权限"/>
+            <column name="enabled" type="BIT" remarks="是否可用"/>
+            <column name="failedLogins" type="INT" remarks="失败登陆次数"/>
+            <column name="lockedOutUntil" type="DATETIME" remarks="锁定时间"/>
+            <column name="lastAccess" type="DATETIME" remarks="最后登录时间"/>
+            <column name="deleted" type="BIT"/>
+            <column name="creator" type="VARCHAR(32)"/>
+            <column name="createTime" type="DATETIME"/>
+            <column name="updater" type="VARCHAR(32)"/>
+            <column name="updateTime" type="DATETIME"/>
+        </createTable>
+
+        <createIndex indexName="idx_user_userCode" tableName="User">
+            <column name="userCode"/>
+        </createIndex>
+    </changeSet>
+
+</databaseChangeLog>

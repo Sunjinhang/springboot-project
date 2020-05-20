@@ -4,7 +4,7 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
     <changeSet id="1.0" author="sjh">
-        <createTable tableName="User" remarks="用户">
+        <createTable tableName="system_user" remarks="用户">
             <column name="id" type="VARCHAR(24)">
                 <constraints primaryKey="true"/>
             </column>
@@ -32,7 +32,7 @@
             <column name="updateTime" type="DATETIME"/>
         </createTable>
 
-        <createIndex indexName="idx_user_userCode" tableName="User">
+        <createIndex indexName="idx_user_userCode" tableName="system_user">
             <column name="userCode"/>
         </createIndex>
     </changeSet>

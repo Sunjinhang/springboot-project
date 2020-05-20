@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.01" author="sjh">
+        <createTable tableName="system_role" remarks="用户角色">
+            <column name="id" type="VARCHAR(24)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="roleCode" type="VARCHAR(32)" remarks="角色编码">
+                <constraints nullable="false"/>
+            </column>
+            <column name="roleName" type="VARCHAR(32)" remarks="角色名称">
+                <constraints nullable="false"/>
+            </column>
+            <column name="authorities" type="LONGTEXT" />
+            <column name="memo" type="VARCHAR(255)"/>
+            <column name="system" type="BIT" remarks="是否系统用户"/>
+            <column name="deleted" type="BIT"/>
+            <column name="creator" type="VARCHAR(32)"/>
+            <column name="createTime" type="DATETIME"/>
+            <column name="updater" type="VARCHAR(32)"/>
+            <column name="updateTime" type="DATETIME"/>
+        </createTable>
+
+        <createIndex indexName="idx_role_code" tableName="system_role">
+            <column name="roleCode"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

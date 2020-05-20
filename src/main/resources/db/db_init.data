@@ -1,0 +1,2 @@
+--用户数据初始化
+INSERT INTO `system_user`(id,loginName,userCode,password) VALUES ('1001', 'admin', '1001', '$2a$10$DbKG4J19p4tN.cJL.AKVlOImcQBQAlEtRiLbtc59kX.CibxX9IFmS');

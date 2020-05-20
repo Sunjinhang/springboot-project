@@ -4,10 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.sjh.cloud_note.mapper.account.UserMapper">
    <select id="findByName" resultType="User" parameterType="String">
-       select * from user where loginName = #{username}
+       select * from system_user where loginName = #{username}
    </select>
     <update id="update" parameterType="User">
-        update user
+        update system_user
         set
             loginName = #{loginName},
             password = #{password},
@@ -23,7 +23,7 @@
         where id = #{id}
     </update>
     <update id="delete" parameterType="User">
-        update user
+        update system_user
         set
             deleted = #{deleted},
             updater = #{updater},

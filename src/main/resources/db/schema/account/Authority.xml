@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.01" author="sjh">
+        <createTable tableName="system_authority" remarks="权限清单">
+            <column name="authNo" type="VARCHAR(16)">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(64)" remarks="权限名称"/>
+            <column name="desc" type="VARCHAR(255)" remarks="权限描述"/>
+            <column name="parent" type="VARCHAR(16)" remarks="父权限No"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

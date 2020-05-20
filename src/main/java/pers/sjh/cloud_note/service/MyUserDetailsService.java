@@ -23,10 +23,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         pers.sjh.cloud_note.domain.account.User user  = userMapper.findByName(username);
-        String password = user.getPassword();
         UserDetails userDetails = null;
         if(user != null){
-            userDetails = new User(username,passwordEncoder.encode(password),true,true,true,true,AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
+            userDetails = new User(username,user.getPassword(),true,true,true,true,AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));
             return userDetails;
         }
         return null;

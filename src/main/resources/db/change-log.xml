@@ -5,4 +5,13 @@
     <!--数据库表定义目录-->
     <includeAll path="classpath*:/db/schema"/>
 
+    <changeSet id="1.01" author="sjh">
+        <sqlFile path="db_init.data"
+                 encoding="utf8"
+                 dbms="mysql"
+                 relativeToChangelogFile="true"
+                 splitStatements="true"
+                 stripComments="true" />
+    </changeSet>
+
 </databaseChangeLog>

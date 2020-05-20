@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.01" author="sjh">
+        <createTable tableName="system_menu" remarks="菜单">
+            <column name="menuNo" type="VARCHAR(16)" remarks="菜单编码">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="text" type="VARCHAR(64)" remarks="菜单名称"/>
+            <column name="authorities" type="VARCHAR(16)" remarks="所属权限"/>
+            <column name="routeId" type="VARCHAR(128)" remarks="路由地址"/>
+            <column name="iconCls" type="VARCHAR(128)" remarks="图标"/>
+            <column name="rowCls" type="VARCHAR(128)" remarks="菜单样式"/>
+            <column name="parent" type="VARCHAR(16)" remarks="父菜单"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

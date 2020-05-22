@@ -7,5 +7,6 @@ layui.config({
     base: rootPath,
     version: true
 }).extend({
-    layuicrm: "layuicrm"
+    layuicrm: "layuicrm",
+    eleTree: "eleTree"
 });

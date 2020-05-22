@@ -8,7 +8,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import pers.sjh.cloud_note.mapper.account.UserMapper;
+import pers.sjh.cloud_note.mapper.system.UserMapper;
 
 
 @Component
@@ -22,7 +22,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        pers.sjh.cloud_note.domain.account.User user  = userMapper.findByName(username);
+        pers.sjh.cloud_note.domain.system.User user  = userMapper.findByName(username);
         UserDetails userDetails = null;
         if(user != null){
             userDetails = new User(username,user.getPassword(),true,true,true,true,AuthorityUtils.commaSeparatedStringToAuthorityList("admin,ROLE_USER"));

@@ -23,7 +23,7 @@
             <column name="parentId"/>
         </createIndex>
     </changeSet>
-    <changeSet id="1.01" author="sjh">
+    <changeSet id="1.01.01" author="sjh" context="!dev">
         <sqlFile path="Area_Init.data"
                  encoding="utf8"
                  dbms="mysql"

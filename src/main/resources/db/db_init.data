@@ -1,2 +1,18 @@
 --用户数据初始化
 INSERT INTO `system_user`(id,loginName,userCode,password) VALUES ('1001', 'admin', '1001', '$2a$10$DbKG4J19p4tN.cJL.AKVlOImcQBQAlEtRiLbtc59kX.CibxX9IFmS');
+
+
+--菜单数据初始化
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1200000', '系统管理', '1200000', '/', 'fa fa-home', NULL, 'root');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1201000', '用户管理', '1201000', '/route/system/user_manage', 'fa fa-window-maximize', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1202000', '菜单管理', '1202000', '/route/system/menu_manage', 'fa fa-gears', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1203000', '角色管理', '1203000', '/route/system/role_manage', 'fa fa-file-text', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1204000', '部门管理', '1204000', '/route/system/department_manage', 'fa fa-tachometer', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1205000', '权限管理', '1205000', '/route/system/authority_manage', 'fa fa-snowflake-o', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1206000', '地区管理', '1206000', '/route/system/area_manage', 'fa fa-snowflake-o', NULL, '1200000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1300000', '系统监控', '1200000', '/', 'fa fa-home', NULL, 'root');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1301000', '在线用户', '1301000', '/', 'fa fa-window-maximize', NULL, '1300000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1302000', '系统日志', '1302000', '/', 'fa fa-gears', NULL, '1300000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1303000', '登录日志', '1303000', '/', 'fa fa-file-text', NULL, '1300000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1304000', '请求追踪', '1304000', '/', 'fa fa-tachometer', NULL, '1300000');
+INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1305000', '系统信息', '1305000', '/', 'fa fa-snowflake-o', NULL, '1300000');

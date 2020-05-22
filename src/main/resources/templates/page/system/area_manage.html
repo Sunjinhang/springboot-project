@@ -1,0 +1,35 @@
+<div class="layui-row layui-col-space10">
+    <div class="layui-col-md3">
+        <div id="areatree" class="eleTree" style="margin-left: 1rem;position:relative"></div>
+    </div>
+    <div class="layui-col-md9">
+
+    </div>
+</div>
+
+<script>
+    layui.use('eleTree', function(){
+        var $ = layui.jquery;
+        var eleTree = layui.eleTree;
+        $.post("/area/search?id=0",function (data) {
+            var el4=eleTree.render({
+                elem: '#areatree',
+                data: data,
+                showCheckbox: true,
+                accordion: true,
+                highlightCurrent:true,
+                checkStrictly:true,
+                showLine:true,
+                lazy: true,
+                load: function(data,callback) {
+                    $.post("/area/search?id=" + data.id,function (newData) {
+                        setTimeout(function() {
+                            callback(newData);
+                        },500);
+                    })
+                }
+            });
+        });
+
+    });
+</script>

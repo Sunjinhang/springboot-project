@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.sjh.cloud_note.mapper.system.UserMapper">
+   <select id="findByName" resultType="User" parameterType="String">
+       select * from system_user where loginName = #{username}
+   </select>
+    <select id="findById" resultType="User" parameterType="String">
+       select * from system_user where id = #{id}
+   </select>
+    <select id="findAll" resultType="User" >
+       select * from system_user
+   </select>
+    <select id="searchList" resultType="User" >
+       select * from system_user
+   </select>
+    <select id="searchCount" resultType="java.lang.Integer" >
+       select count(1) from system_user
+   </select>
+    <update id="update" parameterType="User">
+        update system_user
+        set
+            loginName = #{loginName},
+            password = #{password},
+            email = #{email},
+            realName = #{realName},
+            mobileNo = #{mobileNo},
+            departmentId = #{departmentId},
+            enabled = #{enabled},
+            lastAccess = #{lastAccess},
+            deleted = #{deleted},
+            updater = #{updater},
+            updateTime = NOW()
+        where id = #{id}
+    </update>
+    <update id="delete" parameterType="User">
+        update system_user
+        set
+            deleted = true,
+            updater = #{updater},
+            updateTime = NOW()
+        where id = #{id}
+    </update>
+</mapper>

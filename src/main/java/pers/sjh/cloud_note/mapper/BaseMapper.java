@@ -24,4 +24,8 @@ public interface BaseMapper<T> {
     List<T> find(T obj);
 
     List<T> findAll();
+
+    List searchList();
+
+    int searchCount();
 }

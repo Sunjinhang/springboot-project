@@ -12,8 +12,21 @@
     <select id="findAll" resultType="User" >
        select * from system_user
    </select>
-    <select id="searchList" resultType="User" >
+    <select id="searchList" resultType="User" parameterType="pers.sjh.cloud_note.condition.system.UserSearchCondition">
        select * from system_user
+       <where>
+            !deleted
+           <if test="userCode != null and userCode != ''">
+                and userCode = #{userCode}
+           </if>
+           <if test="loginName != null and loginName != ''">
+               and loginName = #{loginName}
+           </if>
+           <if test="realName != null and realName != ''">
+               and realName = #{realName}
+           </if>
+       </where>
+       limit #{start},#{limit}
    </select>
     <select id="searchCount" resultType="java.lang.Integer" >
        select count(1) from system_user

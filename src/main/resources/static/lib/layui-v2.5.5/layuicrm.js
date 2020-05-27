@@ -19,7 +19,7 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 			}
 		};
 		this.initHome = function () {
-			$('#layuiminiHomeTabIframe').html('<iframe width="100%" height="100%" frameborder="0"  src="/rount/home/welcome"></iframe>');
+			$('#layuiminiHomeTabIframe').html('<iframe width="100%" height="100%" frameborder="0"  src="/route/home/welcome"></iframe>');
 		};
 		this.InitMenu = function(result) {
 			var leftMenuHtml = '';
@@ -76,20 +76,11 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 				}
 				sessionStorage.setItem("layuicrmTabInfo", JSON.stringify(layuicrmTabInfo));
 			}
-			href = href + ".html";
-			var result =  this.checkUrl(href);
-			if(result == true){
-				var html = $.ajax({url:href,async:false});
-				element.tabAdd('layuicrmTab', {
-					title: title + '<i data-tab-close="" class="layui-icon layui-unselect layui-tab-close">ဆ</i>',
-					content: html.responseText,
-					id: tabId
-				});
-			}
-			else
-			{
-				this.error(result)
-			}
+			element.tabAdd('layuicrmTab', {
+				title: title + '<i data-tab-close="" class="layui-icon layui-unselect layui-tab-close">ဆ</i>' ,
+				content: '<iframe width="100%" height="100%" frameborder="0"  src="' + href + '"></iframe>',
+				id: tabId
+			});
 
 		};
 

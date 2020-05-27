@@ -1,5 +1,7 @@
 package pers.sjh.cloud_note.mapper;
 
+import pers.sjh.cloud_note.condition.BaseCondition;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -25,7 +27,7 @@ public interface BaseMapper<T> {
 
     List<T> findAll();
 
-    List searchList();
+    List searchList(BaseCondition condition);
 
     int searchCount();
 }

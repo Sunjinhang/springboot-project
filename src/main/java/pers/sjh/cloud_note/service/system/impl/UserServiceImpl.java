@@ -2,6 +2,7 @@ package pers.sjh.cloud_note.service.system.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.sjh.cloud_note.condition.system.UserSearchCondition;
 import pers.sjh.cloud_note.domain.system.User;
 import pers.sjh.cloud_note.domain.common.Result;
 import pers.sjh.cloud_note.mapper.system.UserMapper;
@@ -20,13 +21,10 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
-
-
-
     @Override
-    public Result<User> searchList() {
+    public Result<User> searchList(UserSearchCondition userSearchCondition) {
         Result<User> result = new Result<>();
-        List<User> list = userMapper.searchList();
+        List<User> list = userMapper.searchList(userSearchCondition);
         int count = userMapper.searchCount();
         result.setCode(0);
         result.setCount(count);

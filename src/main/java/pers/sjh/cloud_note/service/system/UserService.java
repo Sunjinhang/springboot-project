@@ -1,5 +1,6 @@
 package pers.sjh.cloud_note.service.system;
 
+import pers.sjh.cloud_note.condition.system.UserSearchCondition;
 import pers.sjh.cloud_note.domain.system.User;
 import pers.sjh.cloud_note.domain.common.Result;
 
@@ -10,6 +11,6 @@ import pers.sjh.cloud_note.domain.common.Result;
 public interface UserService {
 
 
-    Result<User> searchList();
+    Result<User> searchList(UserSearchCondition userSearchCondition);
 
 }

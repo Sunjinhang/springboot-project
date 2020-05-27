@@ -8,5 +8,7 @@ layui.config({
     version: true
 }).extend({
     layuicrm: "layuicrm",
-    eleTree: "eleTree"
+    eleTree: "eleTree",
+    echarts: 'echarts', // echarts图表扩展
+    echartsTheme: 'echartsTheme' // echarts图表主题扩展
 });

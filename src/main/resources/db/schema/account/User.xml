@@ -5,7 +5,7 @@
 
     <changeSet id="1.0" author="sjh">
         <createTable tableName="system_user" remarks="用户">
-            <column name="id" type="VARCHAR(24)">
+            <column name="id" type="VARCHAR(64)">
                 <constraints primaryKey="true"/>
             </column>
             <column name="loginName" type="VARCHAR(32)" remarks="登录名">

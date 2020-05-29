@@ -259,6 +259,38 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 		        element.tabDelete('layuicrmTab', tabId);
 		    }
 		};
+
+		//模态框
+		this.modalOpen = function (url,title) {
+			$.post(url,function (content){
+				layer.open({
+					type:1,
+					title:title,
+					content:content,
+					area: $(window).width() <= 750 ? '95%' : '50%',
+					offset: '30px',
+					yes: function (index, layero) {
+						$('#user-add').find('#submit').trigger('click');
+					},
+					btn2: function () {
+						$('#user-add').find('#reset').trigger('click');
+						return false;
+					}
+				});
+
+			})
+		}
+
+		this.modalConfirm = function (title,yesFun) {
+			layer.confirm(title, {
+				btn: ['确定','取消']
+				},
+				yesFun,
+				function(index){
+					layer.close(index);
+				}
+			);
+		}
 	
 	}
 

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="pers.sjh.cloud_note.mapper.system.UserMapper">
+<mapper namespace="pers.sjh.springboot.mapper.system.UserMapper">
    <select id="findByName" resultType="User" parameterType="String">
        select * from system_user where loginName = #{username}
    </select>
@@ -12,7 +12,7 @@
     <select id="findAll" resultType="User" >
        select * from system_user
    </select>
-    <select id="searchList" resultType="User" parameterType="pers.sjh.cloud_note.condition.system.UserSearchCondition">
+    <select id="searchList" resultType="User" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select * from system_user
        <where>
             !deleted
@@ -25,12 +25,58 @@
            <if test="realName != null and realName != ''">
                and realName = #{realName}
            </if>
+           <if test="departmentId != null and departmentId != ''">
+               and departmentId = #{departmentId}
+           </if>
        </where>
        limit #{start},#{limit}
    </select>
-    <select id="searchCount" resultType="java.lang.Integer" >
+    <select id="searchCount" resultType="java.lang.Integer" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select count(1) from system_user
+        <where>
+            !deleted
+            <if test="userCode != null and userCode != ''">
+                and userCode = #{userCode}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and loginName = #{loginName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and realName = #{realName}
+            </if>
+            <if test="departmentId != null and departmentId != ''">
+                and departmentId = #{departmentId}
+            </if>
+        </where>
    </select>
+    <insert id="create" parameterType="User">
+        insert into system_user(
+            id,
+            userCode,
+            loginName,
+            password,
+            realName,
+            email,
+            deleted,
+            creator,
+            createTime,
+            updater,
+            updateTime
+        )
+        values(
+            #{id},
+            #{userCode},
+            #{loginName},
+            #{password},
+            #{realName},
+            #{email},
+            #{deleted},
+            #{creator},
+            NOW(),
+            #{updater},
+            NOW()
+        )
+    </insert>
     <update id="update" parameterType="User">
         update system_user
         set
@@ -51,7 +97,6 @@
         update system_user
         set
             deleted = true,
-            updater = #{updater},
             updateTime = NOW()
         where id = #{id}
     </update>

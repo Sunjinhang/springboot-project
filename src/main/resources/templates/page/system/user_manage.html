@@ -10,43 +10,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/lib/layui-v2.5.5/css/layui.css" media="all">
     <link rel="stylesheet" href="/static/lib/layui-v2.5.5/css/layui-crm.css" media="all">
+    <link rel="stylesheet" href="/static/lib/layui-v2.5.5/css/eleTree.css" media="all">
     <link rel="stylesheet" href="/static/lib/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
-    <style>
-        .layui-table-view {
-            margin: 0;
-        }
-    </style>
 </head>
-
 <body>
-<div class="layui-form-item">
-    <div class="layui-inline">
-        <label class="layui-form-label">用户编码</label>
-        <div class="layui-input-inline">
-            <input type="text" id="userCode" autocomplete="off" class="layui-input">
+
+<div style="padding: 10px; background-color: #F2F2F2;">
+    <div class="layui-row layui-col-space10">
+        <div class="layui-col-md2">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div id="departTree" class="eleTree" style="margin-left: 1rem;position:relative" lay-filter="data1"></div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="layui-inline">
-        <label class="layui-form-label">登录名</label>
-        <div class="layui-input-inline">
-            <input type="text" id="loginName" autocomplete="off" class="layui-input">
+        <div class="layui-col-md10">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">用户编码</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="userCode" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">登录名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="loginName" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">真实姓名</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="realName" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary" data-type="search"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                    <table class="layui-hide" id="user_table" lay-filter="user_table" ></table>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="layui-inline">
-        <label class="layui-form-label">真实姓名</label>
-        <div class="layui-input-inline">
-            <input type="text" id="realName" autocomplete="off" class="layui-input">
-        </div>
-    </div>
-    <div class="layui-inline">
-        <button type="submit" class="layui-btn layui-btn-primary" data-type="search"><i class="layui-icon"></i> 搜 索</button>
     </div>
 </div>
-
-</div>
-
-
-<table class="layui-hide" id="user_table" lay-filter="user_table" ></table>
 
 
 <script type="text/html" id="toolbar">
@@ -69,27 +78,55 @@
 <script src="/static/lib/layui-v2.5.5/layui.js" type="text/javascript"></script>
 <script src="/static/lib/layui-v2.5.5/layuiconfig.js" type="text/javascript"></script>
 <script type="text/javascript">
-    layui.use(['table','eleTree'], function(){
+    layui.use(['table','eleTree','layuicrm','layer'], function(){
         var table = layui.table,
-        $ = layui.jquery;
-        var active = {
-            search : function () {
-                var params = getQueryParams();
-                table.reload("user_table",{where: params, page: {curr: 1}});
-            }
-        };
-        function getQueryParams(){
-            return {
-                userCode:$("#userCode").val(),
-                loginName:$("#loginName").val(),
-                realName:$("#realName").val()
-            };
+            layuicrm = layui.layuicrm,
+            layer = layui.layer,
+            $ = layui.jquery,
+            eleTree = layui.eleTree;
 
-        }
-        $('.layui-btn').on('click', function(){
+        var data ;
+
+        $.post("/department/search?id=" + 'root',function (data) {
+            eleTree.render({
+                elem: '#departTree',
+                data: data,
+                accordion: true,
+                highlightCurrent:true,
+                checkStrictly:true,
+                showLine:true,
+                lazy: true,
+                load: function(data,callback) {
+                    $.post("/department/search?id=" + data.id,function (newData) {
+                        setTimeout(function() {
+                            callback(newData);
+                        },500);
+                    })
+                }
+            });
+
+        });
+        $(document).on('click', '.layui-btn', function() {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
         });
+
+
+        eleTree.on("nodeClick(data1)",function(obj) {
+            var data = obj.data.currentData;
+            console.log(data);
+            table.reload("user_table", {
+                where: {
+                    userCode:$("#userCode").val(),
+                    loginName:$("#loginName").val(),
+                    realName:$("#realName").val(),
+                    departmentId:data.id
+                },
+                page: {
+                    curr: 1
+                }
+            });
+        })
         table.render({
             elem: '#user_table'
             ,url:'/user/search'
@@ -101,7 +138,7 @@
                 [
                     {type:'checkbox', fixed: 'left'},
                     {fixed: 'left', title:'操作', toolbar: '#operate_bar', width:150},
-                    {field:'id', title:'ID', width:80, unresize: true, sort: true},
+                    {field:'userCode', title:'用户编码', width:80, sort: true},
                     {field:'loginName', title:'登录名', width:120, edit: 'text'},
                     {field:'realName', title:'真实用户名', width:120, edit: 'text', sort: true},
                     {field:'email', title:'邮箱', width:150, edit: 'text'},
@@ -122,18 +159,115 @@
         });
 
         table.on('toolbar(user_table)', function(obj){
-            var checkStatus = table.checkStatus(obj.config.id);
             switch(obj.event){
                 case 'addUser':
-                    var data = checkStatus.data;
-                    layer.alert(JSON.stringify(data));
+                    layuicrm.modalOpen("/route/system/user_add","新增用户")
                     break;
                 case 'delBatch':
-                    var data = checkStatus.data;
-                    layer.msg('选中了：'+ data.length + ' 个');
+                    layuicrm.modalConfirm("是否确定批量删除这些数据？",delBatch);
                     break;
             };
         });
+
+        table.on('tool(user_table)',function (obj) {
+            var data = obj.data;
+            switch (obj.event) {
+                case 'edit':
+
+                    break;
+                case 'del':
+                     layuicrm.modalConfirm("是否确定要删除用户：" + data.userCode,function (e) {
+                         del(data)
+                     })
+                    break;
+            }
+        })
+
+        var active = {
+            search : function () {
+                table.reload("user_table", {
+                    where: {
+                        userCode:$("#userCode").val(),
+                        loginName:$("#loginName").val(),
+                        realName:$("#realName").val()
+                    },
+                    page: {
+                        curr: 1
+                    }
+                });
+            },
+            submit:function () {
+                var user = {
+                    userCode: $("input[name='userCode']").val(),
+                    realName: $("input[name='realName']").val(),
+                    password: $("input[name='password']").val(),
+                    email: $("input[name='email']").val()
+                }
+                if (user.userCode == "") {
+                    layuicrm.msg_error("用户代码不可为空")
+                    return false;
+                } else if (user.realName == "") {
+                    layuicrm.msg_error("用户名不可为空")
+                    return false;
+                } else if (user.password == "") {
+                    layuicrm.msg_error("用户密码不可为空")
+                    return false;
+                } else if (user.email == "") {
+                    layuicrm.msg_error("邮箱不可为空")
+                    return false;
+                } else {
+                    $.ajax({
+                        url: "/user/create",
+                        type: 'POST',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: 'json',//json 返回值类型
+                        data: JSON.stringify(user),//转化为json字符串
+                        success: function (result) {
+                            if (result.code == 200) {
+                                layer.closeAll();
+                                layuicrm.msg_success("新增用户成功");
+                                table.reload("user_table", {page: {curr: 1}});
+                            } else {
+                                layuicrm.msg_error(result.msg);
+                            }
+                        }
+                    });
+                }
+            },
+            cancel:function () {
+                layer.closeAll();
+            }
+        };
+
+        var delBatch = function () {
+            var checkStatus = table.checkStatus("user_table");
+            var data = checkStatus.data;
+            $.ajax({
+                url: "/user/deleteBatch",
+                type: 'POST',
+                contentType: "application/json; charset=utf-8",
+                dataType: 'json',//json 返回值类型
+                data: JSON.stringify(data),//转化为json字符串
+                success: function (result) {
+                    if (result.code == 200) {
+                        layuicrm.msg_success(result.msg);
+                        table.reload("user_table", {page: {curr: 1}});
+                    } else {
+                        layuicrm.msg_error(result.msg);
+                    }
+                }
+            });
+        }
+        var del = function (data) {
+            $.post("/user/delete?id=" + data.id,function (result) {
+                if (result.code == 200) {
+                    layuicrm.msg_success(result.msg);
+                    table.reload("user_table", {page: {curr: 1}});
+                } else {
+                    layuicrm.msg_error(result.msg);
+                }
+            });
+        }
 
     });
 </script>

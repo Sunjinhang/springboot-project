@@ -1,5 +1,5 @@
 --用户数据初始化
-INSERT INTO `system_user`(id,loginName,userCode,password) VALUES ('1001', 'admin', '1001', '$2a$10$DbKG4J19p4tN.cJL.AKVlOImcQBQAlEtRiLbtc59kX.CibxX9IFmS');
+INSERT INTO `system_user`(id,loginName,userCode,password,deleted) VALUES ('1001', 'admin', '1001', '$2a$10$DbKG4J19p4tN.cJL.AKVlOImcQBQAlEtRiLbtc59kX.CibxX9IFmS',0);
 
 
 --菜单数据初始化
@@ -16,3 +16,11 @@ INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`,
 INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1303000', '登录日志', '1303000', '/', 'fa fa-file-text', NULL, '1300000');
 INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1304000', '请求追踪', '1304000', '/', 'fa fa-tachometer', NULL, '1300000');
 INSERT INTO `system_menu`(`menuNo`, `text`, `authorities`, `routeId`, `iconCls`, `rowCls`, `parent`) VALUES ('1305000', '系统信息', '1305000', '/', 'fa fa-snowflake-o', NULL, '1300000');
+
+
+--部门初始化数据
+INSERT INTO `system_department` VALUES ('1001', '1001', '测试部门1', NULL, NULL, NULL, NULL, NULL, 'root', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `system_department` VALUES ('1002', '1002', '测试部门2', NULL, NULL, NULL, NULL, NULL, 'root', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `system_department` VALUES ('1003', '1003', '测试部门3', NULL, NULL, NULL, NULL, NULL, 'root', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `system_department` VALUES ('1004', '1004', '测试部门4', NULL, NULL, NULL, NULL, NULL, 'root', NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `system_department` VALUES ('1005', '1005', '测试部门5', NULL, NULL, NULL, NULL, NULL, 'root', NULL, NULL, NULL, NULL, NULL);

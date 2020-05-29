@@ -5,7 +5,7 @@
 
     <changeSet id="1.01" author="sjh">
         <createTable tableName="system_role" remarks="用户角色">
-            <column name="id" type="VARCHAR(24)">
+            <column name="id" type="VARCHAR(64)">
                 <constraints primaryKey="true"/>
             </column>
             <column name="roleCode" type="VARCHAR(32)" remarks="角色编码">

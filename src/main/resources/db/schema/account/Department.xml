@@ -5,9 +5,10 @@
 
     <changeSet id="1.01" author="sjh">
         <createTable tableName="system_department" remarks="用户部门">
-            <column name="id" type="VARCHAR(24)">
+            <column name="id" type="VARCHAR(64)">
                 <constraints primaryKey="true"/>
             </column>
+            <column name="deptCode" type="VARCHAR(64)" remarks="中文简称"/>
             <column name="deptName" type="VARCHAR(128)" remarks="中文简称"/>
             <column name="deptFullName" type="VARCHAR(128)" remarks="中文全称"/>
             <column name="deptNameEn" type="VARCHAR(128)" remarks="英文简称"/>

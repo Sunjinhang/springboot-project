@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.sjh.springboot.mapper.general.LoginLogMapper">
+    <select id="searchList" resultType="LoginLog" parameterType="pers.sjh.springboot.condition.general.LoginLogSearchCondition">
+        select * from general_loginlog
+        <include refid="logSearch"/>
+        limit #{start},#{limit}
+    </select>
+    <select id="searchCount" resultType="java.lang.Integer" parameterType="pers.sjh.springboot.condition.general.LoginLogSearchCondition">
+        select count(1) from general_loginlog
+        <include refid="logSearch"/>
+    </select>
+    <insert id="create" parameterType="LoginLog">
+        insert general_loginlog
+        (
+            userName,
+            system,
+            browser,
+            loginTime,
+            ip,
+            location
+        )
+        values(
+            #{userName},
+            #{system},
+            #{browser},
+            #{loginTime},
+            #{ip},
+            #{location}
+        )
+    </insert>
+    <sql id="logSearch">
+        <where>
+            <if test="loginTimeFrom != null">
+                and loginTime &gt;= #{loginTimeFrom}
+            </if>
+            <if test="loginTimeTo != null">
+                and loginTime &lt;= #{loginTimeTo}
+            </if>
+
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
+
+    <changeSet id="1.01" author="sjh">
+        <createTable tableName="general_loginlog" remarks="登录日志">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="userName" type="VARCHAR(32)" remarks="登录用户"/>
+            <column name="system" type="VARCHAR(32)" remarks="系统"/>
+            <column name="browser" type="VARCHAR(32)" remarks="浏览器"/>
+            <column name="loginTime" type="DATETIME" remarks="登陆时间"/>
+            <column name="ip" type="VARCHAR(32)" remarks="IP"/>
+            <column name="location" type="VARCHAR(32)" remarks="登陆地点"/>
+        </createTable>
+        <createIndex indexName="idx_log_id" tableName="general_loginlog">
+            <column name="id"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>

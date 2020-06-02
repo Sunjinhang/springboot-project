@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.Objects;
@@ -30,8 +32,9 @@ public class ConvertToCondition {
         return condition;
     }
 
-    private static <T extends BaseCondition>  void setPropertyValue(T condition,String fieldName,Object fieldValue) throws InvocationTargetException, IllegalAccessException {
+    private static <T extends BaseCondition>  void setPropertyValue(T condition,String fieldName,Object fieldValue) throws InvocationTargetException, IllegalAccessException, ParseException {
         PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(condition.getClass());
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         for (PropertyDescriptor pd : pds) {
             if (Objects.equals(pd.getName(), fieldName)) {
                 Method writeMethod = pd.getWriteMethod();
@@ -55,7 +58,7 @@ public class ConvertToCondition {
                         writeMethod.invoke(condition, Long.parseLong(String.valueOf(fieldValue)));
                     }
                     else if(pd.getPropertyType() == Date.class){
-                        writeMethod.invoke(condition, Date.parse(String.valueOf(fieldValue)));
+                        writeMethod.invoke(condition, format.parse(fieldValue.toString()));
                     }
                     else
                     {

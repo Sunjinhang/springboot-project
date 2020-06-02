@@ -1,4 +1,4 @@
-package pers.sjh.springboot.controller.account;
+package pers.sjh.springboot.controller.general;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,15 +12,23 @@ import pers.sjh.springboot.service.general.LoginLogService;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * @author SunJinHang
+ * @date 2020-06-02 16:01
+ */
 @Controller
-public class LoginController {
+@RequestMapping("/login")
+public class LoginLogController {
+
+    @Autowired
+    private LoginLogService loginLogService;
 
 
-
-    @RequestMapping("/login")
-    public String login(){
-        return "page/account/login";
+    @RequestMapping("/search")
+    @ResponseBody
+    public Result<LoginLog> search(HttpServletRequest httpServletRequest) throws Exception {
+        LoginLogSearchCondition condition = ConvertToCondition.execute(httpServletRequest,LoginLogSearchCondition.class);
+        Result<LoginLog> result = loginLogService.searchList(condition);
+        return result;
     }
-
-
 }

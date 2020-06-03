@@ -38,7 +38,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .failureHandler(loginFailureAuthenticationHandler)
 
                 .and().authorizeRequests()					// 定义哪些URL需要被保护、哪些不需要被保护
-                .antMatchers("/css/**","/lib/**", "/js/**","/images/**", "/webjars/**", "**/favicon.ico","/", "/login").permitAll()		// 设置所有人都可以访问登录页面
+                .antMatchers("/css/**","/lib/**", "/js/**","/images/**", "/webjars/**", "**/favicon.ico","/", "/login","/generate").permitAll()		// 设置所有人都可以访问登录页面
                 .anyRequest().authenticated() 				// 任何请求,登录后可以访问
                 .and().csrf().disable();
         http.headers().frameOptions().disable();

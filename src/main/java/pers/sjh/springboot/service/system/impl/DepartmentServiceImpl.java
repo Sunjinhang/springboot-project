@@ -44,7 +44,7 @@ public class DepartmentServiceImpl implements DepartmentService {
         try{
             List<Department> list = departmentMapper.searchList(departmentSearchCondition);
             int count = departmentMapper.searchCount(departmentSearchCondition);
-            result.setCode(200);
+            result.setCode(0);
             result.setData(list);
             result.setCount(count);
         }

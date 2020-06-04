@@ -2,6 +2,7 @@ package pers.sjh.springboot.service.system.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.sjh.springboot.domain.common.Result;
 import pers.sjh.springboot.domain.system.Menu;
 import pers.sjh.springboot.domain.common.tree.MenuTree;
 import pers.sjh.springboot.mapper.system.MenuMapper;
@@ -47,4 +48,54 @@ public class MenuServiceImpl implements MenuService {
         return treeList;
     }
 
+    @Override
+    public Result<Object> create(Menu menu) {
+        Result<Object> result = new Result<>();
+        try{
+
+        }
+        catch (Exception ex){
+            result.setCode(500);
+            result.setMsg(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public Result<Object> update(Menu menu) {
+        Result<Object> result = new Result<>();
+        try{
+            Menu source = menuMapper.findById(menu.getMenuNo());
+            source.setText(menu.getText());
+            source.setRouteId(menu.getRouteId());
+            source.setIconCls(menu.getIconCls());
+            source.setAuthorities(menu.getAuthorities());
+            source.setParent(menu.getParent());
+            menuMapper.update(source);
+        }
+        catch (Exception ex){
+            result.setCode(500);
+            result.setMsg(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public Result<Object> delete(Menu menu) {
+        Result<Object> result = new Result<>();
+        try{
+            menuMapper.delete(menu);
+        }
+        catch (Exception ex){
+            result.setCode(500);
+            result.setMsg(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public Menu findById(String id) {
+        Menu  menu = menuMapper.findById(id);
+        return menu;
+    }
 }

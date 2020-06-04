@@ -9,6 +9,7 @@ import pers.sjh.springboot.domain.common.BaseModel;
  */
 public class Department extends BaseModel {
 
+    private  String deptCode;
     private  String deptName;
     private  String deptFullName;
     private  String deptNameEn;
@@ -16,6 +17,15 @@ public class Department extends BaseModel {
     private  String memo;
     private  Integer priority;
     private  String parentId;
+
+
+    public String getDeptCode() {
+        return deptCode;
+    }
+
+    public void setDeptCode(String deptCode) {
+        this.deptCode = deptCode;
+    }
 
     public String getDeptName() {
         return deptName;
@@ -77,19 +87,14 @@ public class Department extends BaseModel {
     @Override
     public String toString() {
         return "Department{" +
-                "deptName='" + deptName + '\'' +
+                "deptCode='" + deptCode + '\'' +
+                ", deptName='" + deptName + '\'' +
                 ", deptFullName='" + deptFullName + '\'' +
                 ", deptNameEn='" + deptNameEn + '\'' +
                 ", deptFullNameEn='" + deptFullNameEn + '\'' +
                 ", memo='" + memo + '\'' +
                 ", priority=" + priority +
                 ", parentId='" + parentId + '\'' +
-                ", id='" + id + '\'' +
-                ", deleted=" + deleted +
-                ", creator='" + creator + '\'' +
-                ", createTime=" + createTime +
-                ", updater='" + updater + '\'' +
-                ", updateTime=" + updateTime +
                 '}';
     }
 }

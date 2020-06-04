@@ -1,6 +1,8 @@
 package pers.sjh.springboot.service.system;
 
+import pers.sjh.springboot.domain.common.Result;
 import pers.sjh.springboot.domain.common.tree.MenuTree;
+import pers.sjh.springboot.domain.system.Menu;
 
 import java.util.List;
 
@@ -10,5 +12,17 @@ import java.util.List;
  */
 public interface MenuService {
 
-    public List<MenuTree> findMenuList();
+
+
+    List<MenuTree> findMenuList();
+
+    Result<Object> create(Menu menu);
+
+
+    Result<Object> update(Menu menu);
+
+
+    Result<Object> delete(Menu menu);
+
+    Menu findById(String id);
 }

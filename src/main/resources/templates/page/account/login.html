@@ -79,21 +79,10 @@
         });
 
         $(document).on('click', '#captchaPic', function() {
-            getvCode();
+            $("#captchaPic").attr("src",  "/generate?data=" + new Date().getTime());
         });
 
-        getvCode();
-
-        /**
-         * 获取验证码
-         * 将验证码写到login.html页面的id = verifyimg 的地方
-         */
-        function getvCode() {
-            $("#captchaPic").attr("src",  "/generate?data=" + new Date().getTime());
-        }
-
-
-
+        $("#captchaPic").attr("src",  "/generate?data=" + new Date().getTime());
     });
 </script>
 </body>

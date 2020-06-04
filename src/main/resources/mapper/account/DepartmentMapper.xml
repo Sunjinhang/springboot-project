@@ -62,9 +62,7 @@
             <if test="deptName != null and deptName != ''">
                 and deptName = #{deptName}
             </if>
-            <if test="deptFullName != null and deptFullName != ''">
-                and deptFullName = #{deptFullName}
-            </if>
+
         </where>
     </sql>
 </mapper>

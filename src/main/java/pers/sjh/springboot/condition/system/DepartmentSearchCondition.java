@@ -11,7 +11,6 @@ public class DepartmentSearchCondition extends BaseCondition{
 
     private String deptCode;
     private String deptName;
-    private String deptFullName;
     private String searchText;
 
 
@@ -31,13 +30,7 @@ public class DepartmentSearchCondition extends BaseCondition{
         this.deptName = deptName;
     }
 
-    public String getDeptFullName() {
-        return deptFullName;
-    }
 
-    public void setDeptFullName(String deptFullName) {
-        this.deptFullName = deptFullName;
-    }
 
     @Override
     public String getSearchText() {

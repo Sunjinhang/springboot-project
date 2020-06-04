@@ -25,5 +25,7 @@ public interface DepartmentService {
 
     Result<Object> updateDepartment(Department department);
 
-   void deleteDepartment(String id);
+    Department findById(String id);
+
+    Result<Object> deleteDepartment(Department department);
 }

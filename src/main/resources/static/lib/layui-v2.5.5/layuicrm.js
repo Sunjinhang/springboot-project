@@ -2,6 +2,7 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 	var element = layui.element;
 	var $ = layui.jquery;
 	var layer = layui.layer;
+	var table = layui.table;
 	layuicrm = new function() {
 		this.config = function(name) {
 
@@ -64,6 +65,13 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 			element.init();
 		};
 
+		/**
+		 * 增加 tab页
+		 * @param tabId
+		 * @param href
+		 * @param title
+		 * @param addSession
+		 */
 		this.addTab = function(tabId, href, title, addSession) {
 			if (addSession == undefined || addSession == true) {
 				var layuicrmTabInfo = JSON.parse(sessionStorage.getItem("layuicrmTabInfo"));
@@ -281,6 +289,11 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 			})
 		}
 
+		/**
+		 * 确定提示框
+		 * @param title
+		 * @param yesFun
+		 */
 		this.modalConfirm = function (title,yesFun) {
 			layer.confirm(title, {
 				btn: ['确定','取消']
@@ -291,6 +304,67 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 				}
 			);
 		}
+
+		this.create = function (table,url,data) {
+			$.ajax({
+				url: url,
+				type: 'POST',
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',//json 返回值类型
+				data: JSON.stringify(data),//转化为json字符串
+				success: function (result) {
+					if (result.code == 200) {
+						layer.closeAll();
+						layuicrm.msg_success(result.msg);
+						table.reload(table, {page: {curr: 1}});
+					} else {
+						layuicrm.msg_error(result.msg);
+					}
+				}
+			});
+		}
+
+
+		this.delBatch = function(table,url){
+			var checkStatus = table.checkStatus(table);
+			var data = checkStatus.data;
+			$.ajax({
+				url: url,
+				type: 'POST',
+				contentType: "application/json; charset=utf-8",
+				dataType: 'json',//json 返回值类型
+				data: JSON.stringify(data),//转化为json字符串
+				success: function (result) {
+					if (result.code == 200) {
+						this.msg_success(result.msg);
+						table.reload(table, {page: {curr: 1}});
+					} else {
+						this.msg_error(result.msg);
+					}
+				}
+			});
+		}
+
+		this.delete = function (table,url) {
+			$.post(url,function (result) {
+				if (result.code == 200) {
+					this.msg_success(result.msg);
+					table.reload(table, {page: {curr: 1}});
+				} else {
+					this.msg_error(result.msg);
+				}
+			});
+		}
+
+		this.reload = function (table,params) {
+			table.reload(table, {
+				where: params,
+				page: {
+					curr: 1
+				}
+			});
+		}
+
 	
 	}
 

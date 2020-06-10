@@ -9,6 +9,7 @@ layui.config({
 }).extend({
     layuicrm: "layuicrm",
     eleTree: "eleTree",
+    tableSelect:'tableSelect',
     echarts: 'echarts', // echarts图表扩展
     echartsTheme: 'echartsTheme' // echarts图表主题扩展
 });

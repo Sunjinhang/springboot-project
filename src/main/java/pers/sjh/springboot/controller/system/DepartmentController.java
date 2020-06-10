@@ -50,7 +50,7 @@ public class DepartmentController {
         department.setId(UUID.randomString());
         department.setCreator(authentication.getName());
         department.setUpdater(authentication.getName());
-        Result<Object> result = departmentService.addDepartment(department);
+        Result<Object> result = departmentService.create(department);
         return  result;
     }
 
@@ -59,7 +59,7 @@ public class DepartmentController {
     @ResponseBody
     public  Result<Object> update(Department department, Authentication authentication){
         department.setUpdater(authentication.getName());
-        Result<Object> result = departmentService.updateDepartment(department);
+        Result<Object> result = departmentService.update(department);
         return  result;
     }
 
@@ -69,7 +69,7 @@ public class DepartmentController {
     public  Result<Object> delete(String id, Authentication authentication){
         Department department = departmentService.findById(id);
         department.setDeleted(true);
-        Result<Object> result =departmentService.deleteDepartment(department);
+        Result<Object> result =departmentService.delete(department);
         return  result;
     }
 
@@ -81,7 +81,7 @@ public class DepartmentController {
             for(Department department : departments){
                 department.setUpdater(authentication.getName());
                 department.setDeleted(true);
-                departmentService.updateDepartment(department);
+                departmentService.update(department);
                 result.setCode(200);
                 result.setMsg("批量删除部门成功");
             }

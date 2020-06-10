@@ -24,8 +24,6 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
 
-
-
     @Override
     public Result<User> searchList(UserSearchCondition userSearchCondition) {
         Result<User> result = new Result<>();
@@ -44,7 +42,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result<Object> addUser(User user) {
+    public Result<Object> create(User user) {
         Result<Object> result = new Result<>();
         try{
             user.setDeleted(false);
@@ -60,26 +58,49 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result<Object> updateUser(User source) {
+    public Result<Object> update(User source) {
         Result<Object> result = new Result<>();
-        User user = userMapper.findById(source.getId());
-        user.setLoginName(source.getLoginName());
-        user.setPassword(source.getPassword());
-        user.setRealName(source.getRealName());
-        user.setLastAccess(new Date());
-        user.setEmail(source.getEmail());
-        user.setAuthorities(source.getAuthorities());
-        user.setDepartmentId(source.getDepartmentId());
-        user.setFailedLogins(source.getFailedLogins());
-        user.setRoles(source.getRoles());
+        try{
+            User user = userMapper.findById(source.getId());
+            user.setLoginName(source.getLoginName());
+            user.setPassword(source.getPassword());
+            user.setRealName(source.getRealName());
+            user.setLastAccess(new Date());
+            user.setEmail(source.getEmail());
+            user.setAuthorities(source.getAuthorities());
+            user.setDepartmentId(source.getDepartmentId());
+            user.setFailedLogins(source.getFailedLogins());
+            user.setRoles(source.getRoles());
+            userMapper.update(user);
+            result.setCode(200);
+            result.setMsg("更新用户成功");
+        }
+        catch (Exception ex){
+            result.setCode(500);
+            result.setMsg(ex.getMessage());
+        }
+
         return result;
     }
 
     @Override
-    public void deleteUser(String id) {
+    public Result<Object> delete(User user) {
         Result<Object> result = new Result<>();
+        try{
+            userMapper.delete(user);
+            result.setCode(200);
+            result.setMsg("删除用户成功");
+        }
+        catch (Exception ex){
+           result.setCode(500);
+           result.setMsg(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public User findById(String id) {
         User user = userMapper.findById(id);
-        user.setDeleted(true);
-        userMapper.delete(user);
+        return user;
     }
 }

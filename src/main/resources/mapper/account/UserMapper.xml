@@ -14,40 +14,12 @@
    </select>
     <select id="searchList" resultType="User" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select * from system_user
-       <where>
-            !deleted
-           <if test="userCode != null and userCode != ''">
-                and userCode = #{userCode}
-           </if>
-           <if test="loginName != null and loginName != ''">
-               and loginName = #{loginName}
-           </if>
-           <if test="realName != null and realName != ''">
-               and realName = #{realName}
-           </if>
-           <if test="departmentId != null and departmentId != ''">
-               and departmentId = #{departmentId}
-           </if>
-       </where>
+        <include refid="deptSearch"/>
        limit #{start},#{limit}
    </select>
     <select id="searchCount" resultType="java.lang.Integer" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select count(1) from system_user
-        <where>
-            !deleted
-            <if test="userCode != null and userCode != ''">
-                and userCode = #{userCode}
-            </if>
-            <if test="loginName != null and loginName != ''">
-                and loginName = #{loginName}
-            </if>
-            <if test="realName != null and realName != ''">
-                and realName = #{realName}
-            </if>
-            <if test="departmentId != null and departmentId != ''">
-                and departmentId = #{departmentId}
-            </if>
-        </where>
+        <include refid="deptSearch"/>
    </select>
     <insert id="create" parameterType="User">
         insert into system_user(
@@ -100,4 +72,22 @@
             updateTime = NOW()
         where id = #{id}
     </update>
+
+    <sql id="userSearch">
+        <where>
+            !deleted
+            <if test="userCode != null and userCode != ''">
+                and userCode = #{userCode}
+            </if>
+            <if test="loginName != null and loginName != ''">
+                and loginName = #{loginName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and realName = #{realName}
+            </if>
+            <if test="departmentId != null and departmentId != ''">
+                and departmentId = #{departmentId}
+            </if>
+        </where>
+    </sql>
 </mapper>

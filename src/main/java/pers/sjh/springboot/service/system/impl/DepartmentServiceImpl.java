@@ -56,7 +56,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Result<Object> addDepartment(Department department) {
+    public Result<Object> create(Department department) {
         Result<Object> result = new Result<>();
         try{
 
@@ -69,7 +69,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Result<Object> updateDepartment(Department department) {
+    public Result<Object> update (Department department) {
         Result<Object> result = new Result<>();
         try{
 
@@ -82,9 +82,28 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public void deleteDepartment(String id) {
+    public Result<Object> delete(Department department) {
+        Result<Object> result = new Result<>();
+        try{
+             departmentMapper.delete(department);
+             result.setCode(200);
+             result.setMsg("删除部门成功");
+        }
+        catch (Exception ex){
+            result.setCode(500);
+            result.setMsg(ex.getMessage());
+        }
+        return result;
+    }
+
+    @Override
+    public Department findById(String id) {
         Department department = departmentMapper.findById(id);
-        department.setDeleted(true);
-        departmentMapper.delete(department);
+        return department;
+    }
+
+    @Override
+    public List<Department> findAll() {
+        return null;
     }
 }

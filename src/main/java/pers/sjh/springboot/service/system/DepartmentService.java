@@ -5,6 +5,7 @@ import pers.sjh.springboot.domain.common.Result;
 import pers.sjh.springboot.domain.common.tree.DepartmentTree;
 import pers.sjh.springboot.domain.system.Department;
 import pers.sjh.springboot.domain.system.User;
+import pers.sjh.springboot.service.BaseService;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  * @author SunJinHang
  * @date 2020-05-27 17:43
  */
-public interface DepartmentService {
+public interface DepartmentService extends BaseService<Department> {
 
 
     List<DepartmentTree> getDepartmentTree(String id);
@@ -20,12 +21,4 @@ public interface DepartmentService {
 
     Result<Department> searchList(DepartmentSearchCondition departmentSearchCondition);
 
-
-    Result<Object> addDepartment(Department department);
-
-    Result<Object> updateDepartment(Department department);
-
-    Department findById(String id);
-
-    Result<Object> deleteDepartment(Department department);
 }

@@ -49,7 +49,7 @@ public class UserController {
         user.setUpdater(authentication.getName());
         String password = user.getPassword();
         user.setPassword(passwordEncoder.encode(password));
-        Result<Object> result = userService.addUser(user);
+        Result<Object> result = userService.create(user);
         return result;
     }
 
@@ -59,7 +59,7 @@ public class UserController {
         Result<Object> result = new Result<>();
         try{
             for(User user :users){
-                userService.deleteUser(user.getId());
+                userService.delete(user);
             }
             result.setCode(200);
             result.setMsg("批量删除用户成功");
@@ -76,7 +76,8 @@ public class UserController {
     public Result<Object> delete(String id){
         Result<Object> result = new Result<>();
         try{
-            userService.deleteUser(id);
+            User user = userService.findById(id);
+            userService.delete(user);
             result.setCode(200);
             result.setMsg("删除用户成功");
         }

@@ -305,7 +305,7 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 			);
 		}
 
-		this.create = function (table,url,data) {
+		this.create = function (data_table,url,data) {
 			$.ajax({
 				url: url,
 				type: 'POST',
@@ -316,7 +316,7 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 					if (result.code == 200) {
 						layer.closeAll();
 						layuicrm.msg_success(result.msg);
-						table.reload(table, {page: {curr: 1}});
+						table.reload(data_table, {page: {curr: 1}});
 					} else {
 						layuicrm.msg_error(result.msg);
 					}
@@ -325,8 +325,8 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 		}
 
 
-		this.delBatch = function(table,url){
-			var checkStatus = table.checkStatus(table);
+		this.delBatch = function(data_table,url){
+			var checkStatus = table.checkStatus(data_table);
 			var data = checkStatus.data;
 			$.ajax({
 				url: url,
@@ -336,28 +336,28 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 				data: JSON.stringify(data),//转化为json字符串
 				success: function (result) {
 					if (result.code == 200) {
-						this.msg_success(result.msg);
-						table.reload(table, {page: {curr: 1}});
+						layuicrm.msg_success(result.msg);
+						table.reload(data_table, {page: {curr: 1}});
 					} else {
-						this.msg_error(result.msg);
+						layuicrm.msg_error(result.msg);
 					}
 				}
 			});
 		}
 
-		this.delete = function (table,url) {
+		this.delete = function (data_table,url) {
 			$.post(url,function (result) {
 				if (result.code == 200) {
-					this.msg_success(result.msg);
-					table.reload(table, {page: {curr: 1}});
+					layuicrm.msg_success(result.msg);
+					table.reload(data_table, {page: {curr: 1}});
 				} else {
-					this.msg_error(result.msg);
+					layuicrm.msg_error(result.msg);
 				}
 			});
 		}
 
-		this.reload = function (table,params) {
-			table.reload(table, {
+		this.reload = function (data_table,params) {
+			table.reload(data_table, {
 				where: params,
 				page: {
 					curr: 1

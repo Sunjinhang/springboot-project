@@ -12,9 +12,9 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">密 码：</label>
+        <label class="layui-form-label">部门：</label>
         <div class="layui-input-block">
-            <input type="password" name="password" autocomplete="off" class="layui-input">
+            <input type="text" name="" placeholder="请输入" autocomplete="off" class="layui-input" id="dept">
         </div>
     </div>
     <div class="layui-form-item">
@@ -33,3 +33,32 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+    layui.use(['tableSelect'], function(){
+
+        var tableSelect = layui.tableSelect;
+
+        tableSelect.render({
+            elem: '#dept',
+            checkedKey: 'id',
+            table: {
+                url: '/department/search',
+                cols: [
+                    [
+                        {field:'id', title:'编号', width:80, sort: true},
+                        {field:'deptCode', title:'部门代码', width:120},
+                        {field:'deptName', title:'部门名称', width:120},
+                    ]
+                ]
+            },
+            done: function (elem, data) {
+                var NEWJSON = []
+                layui.each(data.data, function (index, item) {
+                    NEWJSON.push(item.username)
+                })
+                elem.val(NEWJSON.join(","))
+            }
+        })
+
+    });
+</script>

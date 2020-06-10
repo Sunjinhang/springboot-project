@@ -98,4 +98,9 @@ public class MenuServiceImpl implements MenuService {
         Menu  menu = menuMapper.findById(id);
         return menu;
     }
+
+    @Override
+    public List<Menu> findAll() {
+        return null;
+    }
 }

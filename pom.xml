@@ -5,11 +5,11 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.7.RELEASE</version>
+        <version>2.4.2</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>pers.sjh</groupId>
-    <artifactId>cloud_note</artifactId>
+    <artifactId>springboot_project</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Application</name>
     <description>Demo project for Spring Boot</description>
@@ -92,7 +92,6 @@
             <optional>true</optional>
         </dependency>
 
-
         <!-- 验证码生成插件 -->
         <dependency>
             <groupId>com.github.whvcse</groupId>
@@ -100,6 +99,11 @@
             <version>1.6.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>5.7.16</version>
+        </dependency>
 
     </dependencies>
 
@@ -108,6 +112,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.4.2</version>
             </plugin>
         </plugins>
     </build>

@@ -40,6 +40,6 @@ public class LoginSuccessAuthenticationHandler implements AuthenticationSuccessH
         loginLog.setLocation(location);
         loginLog.setSystemBrowserInfo(httpServletRequest);
         loginLogMapper.create(loginLog);
-        httpServletResponse.sendRedirect("/route/home/index");
+        httpServletResponse.sendRedirect("/");
     }
 }

@@ -14,12 +14,12 @@
    </select>
     <select id="searchList" resultType="User" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select * from system_user
-        <include refid="deptSearch"/>
+        <include refid="userSearch"/>
        limit #{start},#{limit}
    </select>
     <select id="searchCount" resultType="java.lang.Integer" parameterType="pers.sjh.springboot.condition.system.UserSearchCondition">
        select count(1) from system_user
-        <include refid="deptSearch"/>
+        <include refid="userSearch"/>
    </select>
     <insert id="create" parameterType="User">
         insert into system_user(

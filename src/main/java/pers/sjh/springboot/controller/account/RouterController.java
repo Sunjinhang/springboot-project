@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class RouterController {
 
-    @RequestMapping(path = {"/route/{name}/{id}"})
+    @RequestMapping(path = {"/{name}/{id}"})
     public String getRoute(@PathVariable("name") String name, @PathVariable("id") String id, Authentication authentication, Model model){
         String username = authentication.getName();
         model.addAttribute("username",username);

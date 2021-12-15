@@ -20,7 +20,7 @@ layui.define(['element', 'layer', 'jquery'], function(exports) {
 			}
 		};
 		this.initHome = function () {
-			$('#layuiminiHomeTabIframe').html('<iframe width="100%" height="100%" frameborder="0"  src="/route/home/welcome"></iframe>');
+			$('#layuiminiHomeTabIframe').html('<iframe width="100%" height="100%" frameborder="0"  src="/home/welcome"></iframe>');
 		};
 		this.InitMenu = function(result) {
 			var leftMenuHtml = '';
